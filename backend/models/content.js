@@ -15,10 +15,6 @@ const Content = sequelize.define('Content', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    brief: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     createDate: {
         type: DataTypes.DATE,
         allowNull: true

@@ -1,21 +1,14 @@
 const {Sequelize, DataTypes} = require('sequelize');
 const sequelize = require('../config/db-config');
-
-const Content = sequelize.define('Content', {
+const User = require('./user');
+const Content = require('./content');
+const Comment = sequelize.define('Comment', {
     id: {
         type: DataTypes.UUID,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
     },
     content: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    title: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    brief: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -27,16 +20,21 @@ const Content = sequelize.define('Content', {
         type: DataTypes.DATE,
         allowNull: true
     },
-    userId: { // Khóa ngoại liên kết với bảng User
+    userId: {
         type: DataTypes.UUID,
         references: {
-            model: User, // Model User
-            key: 'id',   // Khóa chính của User
+            model: User,
+            key: 'id',
         },
-        allowNull: false,
+    },
+    contentId: {
+        type: DataTypes.UUID,
+        references: {
+            model: Content,
+            key: 'id',
+        },
     },
 }, {
-    timestamps: false
+    timestamps: false,
 });
-
-module.exports = Content;
+module.exports = Comment

@@ -46,22 +46,34 @@ const authorizeRole = (requiredRole) => {
 const contentRoute = require('./routes/content-route');
 app.use('/content', contentRoute);
 
-const UserRoute = require('./routes/user-route');
-app.use('/user', authenticateToken, authorizeRole('admin'), UserRoute);
+const userRoute = require('./routes/user-route');
+// app.use('/user', authenticateToken, authorizeRole('admin'), userRoute);
+app.use('/user', userRoute);
+
 
 const authRoute = require('./routes/auth-route');
 app.use('/auth', authRoute);
+
+const commentRoute = require('./routes/comment-route');
+app.use('/comment', commentRoute);
 
 // Models
 const User = require('./models/user');
 const Content = require('./models/content');
 const Role = require('./models/role');
-
+const Comment = require('./models/comment');
 // Thiết lập quan hệ giữa các bảng
 User.hasMany(Content, { foreignKey: 'userId', onDelete: 'CASCADE' });
 Content.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
 User.belongsTo(Role, { foreignKey: 'role', onDelete: 'CASCADE' });
 Role.hasOne(User, { foreignKey: 'role', onDelete: 'CASCADE' });
+// models/content.js
+Content.hasMany(Comment, { foreignKey: 'contentId', onDelete: 'CASCADE' });
+Comment.belongsTo(Content, { foreignKey: 'contentId' });
+
+// models/comment.js
+Comment.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(Comment, { foreignKey: 'userId' });
 
 // Start server
 app.listen(port, () => {
