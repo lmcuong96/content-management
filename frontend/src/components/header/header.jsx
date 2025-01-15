@@ -16,7 +16,7 @@ export const Header = () => cs(
                             <p className="text-2xl font-semibold">Content Management</p>
                         </li>
                         <li><NavLink className={isActive} to="/user-contents">User Contents</NavLink></li>
-                        <li><NavLink className={isActive} to="/login">Login</NavLink></li>
+                        <li><NavLink className={isActive} to="/register-login/login">Login</NavLink></li>
                     </ul>
                 </nav>
             </header>

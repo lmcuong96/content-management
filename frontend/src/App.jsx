@@ -7,6 +7,8 @@ import {UserContent} from "./pages/contents/user-content/user-content.jsx";
 import {AllContents} from "./pages/contents/all-contents/all-contents.jsx";
 import {cs, provideContext} from "cs-react";
 import {createApis} from "./apis/create-apis.js";
+import {Register} from "./pages/auth/register/register.jsx";
+import {RegisterLoginLayout} from "./components/register-login/register-login-layout/register-login-layout.jsx";
 
 const Apis =  ({next}) => next(createApis())
 
@@ -31,10 +33,20 @@ const App = () => cs(
                         path: "/user-contents",
                         element: <UserContent/>
                     },
+                ],
+            },
+            {
+                path: "register-login",
+                element: <RegisterLoginLayout/>,
+                children: [
                     {
-                        path: "/login",
+                        path: "login",
                         element: <Login/>
                     },
+                    {
+                        path: "register",
+                        element: <Register/>
+                    }
                 ]
             }
         ])

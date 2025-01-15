@@ -6,7 +6,7 @@ export const Root = () => cs(
     () => (
         <div className="flex flex-col min-h-screen">
             <Header/>
-            <main className="w-full flex flex-grow justify-center m-3">
+            <main className="w-full flex flex-grow justify-center my-3">
                 <Outlet/>
             </main>
             <Footer/>

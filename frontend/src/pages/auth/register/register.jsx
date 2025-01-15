@@ -1,9 +1,8 @@
-import {cs, State} from "cs-react";
+import {cs} from "cs-react";
 import {Link} from "react-router-dom";
-import {Input} from "../../../components/common/input/input.jsx";
 import {RegisterLoginForm} from "../../../components/register-login/register-login-form/register-login-form.jsx";
 
-export const Login = () => cs(
+export const Register = () => cs(
     () => {
         return (
             <section className="container flex gap-20 items-center justify-center">
