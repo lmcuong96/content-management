@@ -1,6 +1,6 @@
 import {cs, State} from "cs-react";
 import {Link} from "react-router-dom";
-import {Input} from "../../../components/common/input/input.jsx";
+import {TextInput} from "../../../components/common/text-input/text-input.jsx";
 import {RegisterLoginForm} from "../../../components/register-login/register-login-form/register-login-form.jsx";
 
 export const Login = () => cs(

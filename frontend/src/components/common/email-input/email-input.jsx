@@ -1,9 +1,10 @@
 import {bindInput, cs, State} from "cs-react";
 
-export const Input = ({next, value, type, className, placeholder}) => cs(
+export const EmailInput = ({next, value, type, className, placeholder}) => cs(
     ['input', (_, next) => State({initValue: value, next})],
     ({input}) => {
-        const error = input.value?.length ? null : "This field is required";
+        const error = (input.value?.length && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) ?
+            null : "Please enter a valid email";
         return next({
             render: ({showErrors} = {}) => (<>
                 <input {...{
@@ -13,7 +14,7 @@ export const Input = ({next, value, type, className, placeholder}) => cs(
                     placeholder
                 }} />
                 {showErrors && error && (
-                    <p className="fs-6 text-danger">
+                    <p className="text-red-600">
                         {error}
                     </p>
                 )}
