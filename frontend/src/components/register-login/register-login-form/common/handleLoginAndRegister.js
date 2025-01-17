@@ -1,22 +1,25 @@
-export const handleLogin = ({pathname, email, password, name, confirmPassword, showErrors}) => {
+export const handleLogin = ({isLoginPath, email, password, name, confirmPassword, showErrors}) => {
     const loginValidate =
         (email.invalid !== null || password.invalid !== null)
 
     const registerValidate = name.invalid !== null || email.invalid !== null ||
         password.invalid !== null || confirmPassword.invalid !== null
 
-    const equalPassword = password.value === confirmPassword.value ? true : password.error.onChange("Password does not match")
-    // console.log("name.invalid !== null: " + name.invalid !== null);
-    // console.log("email.invalid !== null: " + email.invalid !== null);
-    // console.log("password.invalid !== null: " + password.invalid !== null);
-    // console.log("registerValidate: " + registerValidate);
+    const passwordValidate = password.value === confirmPassword.value
 
-    if (pathname) {
+    if (isLoginPath) {
         loginValidate ? showErrors.onChange(true) :
             console.log("login successful");
     } else {
-        registerValidate || !equalPassword ? showErrors.onChange(true) :
+        if (registerValidate) {
+            showErrors.onChange(true)
+        } else if (!passwordValidate) {
+            showErrors.onChange(true)
+            password.error.onChange("Passwords do not match")
+        } else {
             console.log("register successful");
+        }
+
     }
 
 }
