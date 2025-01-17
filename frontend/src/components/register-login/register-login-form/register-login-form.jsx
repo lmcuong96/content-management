@@ -1,11 +1,12 @@
 import {TextInput} from "../../common/text-input/text-input.jsx";
 import {cs, State} from "cs-react";
 import {Link} from "react-router-dom";
-import {handleLogin} from "./common/handleLoginAndRegister.js";
+import {handleLogin, handleRegister} from "./common/handleLoginAndRegister.js";
 import {PasswordInput} from "../../common/password-input/password-input.jsx";
 import {EmailInput} from "../../common/email-input/email-input.jsx";
-const className= "w-full px-2 py-1 my-2 rounded shadow shadow-slate-900/50"
-const  value= ""
+
+const className = "w-full px-2 py-1 my-2 rounded shadow shadow-slate-900/50"
+const value = ""
 export const RegisterLoginForm = () => cs(
     ['name', (_, next) => TextInput({
         type: "text",
@@ -59,15 +60,27 @@ export const RegisterLoginForm = () => cs(
                     </div>
                 }
                 <div className="flex flex-col justify-between gap-3 my-5">
-                    <button
+                    {/*Login*/}
+                    {isLoginPath && <button
                         onClick={() => handleLogin({
-                             isLoginPath, name, confirmPassword,
                             email, password, showErrors
                         })}
                         className="w-full bg-slate-950 text-white py-2 px-4 rounded shadow shadow-slate-900/50 text-center"
                         type="button">
-                        {isLoginPath ? "Login" : "Register"}
-                    </button>
+                        Login
+                    </button>}
+
+                    {/*Register*/}
+                    {!isLoginPath && <button
+                        onClick={() => handleRegister({
+                            isLoginPath, name, confirmPassword,
+                            email, password, showErrors
+                        })}
+                        className="w-full bg-slate-950 text-white py-2 px-4 rounded shadow shadow-slate-900/50 text-center"
+                        type="button">
+                        Register
+                    </button>}
+
                     <Link to={`/register-login/${isLoginPath ? "register" : "login"}`}
                           className="hover:underline hover:text-sky-700 text-sky-600">
                         Click here if you {isLoginPath ? "don't" : "already"} have an account
